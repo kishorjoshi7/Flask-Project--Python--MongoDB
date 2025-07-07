@@ -82,7 +82,7 @@ Use tools like **Postman** or **cURL** to test the API endpoints.
 
 ## 🙌 Acknowledgements
 
-Built with ❤️ by [Kishor Joshi](https://github.com/kishorjoshi7)  
+Built by [Kishor Joshi](https://github.com/kishorjoshi7)  
 Inspired by real-world backend architecture and MongoDB integration patterns.
 
 ---
