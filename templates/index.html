@@ -5,41 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup Page</title>
-    
+    <style>
+        html, body {
+            background-color: grey;
+        }
+        p {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 24px;
+            color: yellow;
+        }
+        .form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            color: yellowgreen;
+        }
+        label, input {
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
     <p> Welcome to the Signup Page</p>
     <p>Today is: {{ day_of_week }}</p>
     <p>Current Time is: {{ current_time }}</p>
+    <form class="form" action="/submit" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <div style="margin-top: 20px;">
+            <button type="submit" aria-setsize="90" style="font-size: 1.2rem; padding: 5px 15px;">Sign Up</button>
+        </div>
+    </form>
 </body>
-<form class="form" action="/submit" method="post">
-
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-   <div style="margin-top: 20px;">
-        <button type="submit" aria-setsize="90" style="font-size: 1.2rem; padding: 5px 15px;">Sign Up</button>
-    </div>
-</form>
-<style>
-    body {
-        background-color: grey;
-    }
-    p {
-        margin-top: 40px;
-        text-align: center;
-        font-size: 24px;
-        color: yellow;
-    }
-    .form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 20px;
-        color: yellowgreen;
-    }
-</style>
 </html>
