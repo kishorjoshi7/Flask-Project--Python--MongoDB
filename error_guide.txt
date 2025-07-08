@@ -1,0 +1,70 @@
+# Common Errors and Resolutions in Flask-Tutorial
+
+This file documents errors encountered during development, their causes, and how they were resolved. It also provides background knowledge to help you understand and fix similar issues in the future.
+
+---
+
+## 1. TypeError: Object of type ObjectId is not JSON serializable
+
+**Error Message:**
+```
+TypeError: Object of type ObjectId is not JSON serializable
+```
+
+**Where it happened:**
+- In the `/submit` route of `app1.py`, when returning the result of a MongoDB insert operation as JSON.
+
+**Why it happened:**
+- When you insert a document into MongoDB using PyMongo, the result includes an `_id` field of type `ObjectId`.
+- Python's `json` module (used by Flask to return JSON responses) does not know how to serialize `ObjectId` objects, because they are not standard JSON types.
+- Attempting to return an `ObjectId` directly in a JSON response causes this error.
+
+**How it was resolved:**
+- Convert the `ObjectId` to a string before returning it in the JSON response:
+  ```python
+  return {'inserted_id': str(result.inserted_id)}
+  ```
+- Strings are JSON serializable, so this fixes the error.
+
+**Knowledge:**
+- Always ensure that any custom or non-standard Python objects (like `ObjectId`, `datetime`, etc.) are converted to standard types (like `str`, `int`, `float`) before returning them in a JSON response.
+
+---
+
+## 2. ImportError: cannot import name 'load_dotenv' from 'dotenv'
+
+**Error Message:**
+```
+ImportError: cannot import name 'load_dotenv' from 'dotenv'
+```
+
+**Where it happened:**
+- When trying to import `load_dotenv` in `app1.py`.
+
+**Why it happened:**
+- There was a package named `dotenv` installed, which is not the correct package for Flask projects. The correct package is `python-dotenv`.
+- Sometimes, a file or folder named `dotenv.py` or `dotenv/` in your project can also shadow the real package.
+
+**How it was resolved:**
+- Uninstall any incorrect `dotenv` package:
+  ```
+  pip uninstall dotenv
+  ```
+- Install the correct package:
+  ```
+  pip install python-dotenv
+  ```
+- Make sure the import is:
+  ```python
+  from dotenv import load_dotenv
+  ```
+- If the problem persists, check for any local files or folders named `dotenv.py` or `dotenv/` and remove or rename them.
+- If still unresolved, recreate the virtual environment and reinstall dependencies.
+
+**Knowledge:**
+- Always use the correct package name (`python-dotenv`) for loading environment variables in Flask projects.
+- Avoid naming your own files or folders the same as popular packages to prevent import conflicts.
+
+---
+
+Add more errors and solutions here as you encounter them!
