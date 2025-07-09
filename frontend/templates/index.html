@@ -1,0 +1,94 @@
+<!--
+    index.html - Signup Page Template
+    =================================
+    This is the main HTML template for the frontend Flask microservice.
+    - Renders a signup form for users to enter their name, email, and password.
+    - Displays the current day and time (passed from Flask backend).
+    - Uses Jinja2 templating syntax (e.g., {{ day_of_week }}) to insert dynamic values.
+    - Styled with internal CSS for a modern, readable look.
+    - On form submission, data is sent to the Flask app's /submit route for processing.
+    
+    For beginners:
+    - The form uses the POST method to securely send data.
+    - All input fields are required for basic validation.
+    - You can add more fields or customize the style as you learn.
+    - The backend will handle saving the data and returning a response.
+    - You can display success/error messages by updating this template to show Flask variables (see below for an example).
+-->
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <style>
+        html, body {
+            background-color: grey;
+        }
+        p {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 24px;
+            color: yellow;
+        }
+        .form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            color: yellowgreen;
+        }
+        label, input {
+            margin: 5px 0;
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            background-color: white;
+            color: black;
+            border: 1px solid #ccc;
+            padding: 8px;
+            border-radius: 4px;
+            width: 250px;
+        }
+        .success {
+            color: #00ff00;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .error {
+            color: #ff3333;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <p> Welcome to the Signup Page</p>
+    <p>Today is: {{ day_of_week }}</p>
+    <p>Current Time is: {{ current_time }}</p>
+    <!-- Example: Display a success or error message from Flask (if set) -->
+    {% if success_message %}
+        <div class="success">{{ success_message }}</div>
+    {% endif %}
+    {% if error_message %}
+        <div class="error">{{ error_message }}</div>
+    {% endif %}
+    <form class="form" action="/submit" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <div style="margin-top: 20px;">
+            <button type="submit" aria-setsize="90" style="font-size: 1.2rem; padding: 5px 15px;">Sign Up</button>
+        </div>
+    </form>
+    <!--
+        For beginners:
+        - You can display backend responses (like the MongoDB ID) by passing them from Flask to this template.
+        - Example in Flask route:
+            return render_template('index.html', ..., success_message='Signup successful! Your ID: ' + inserted_id)
+        - To add more fields, copy and modify the <label> and <input> blocks above.
+    -->
+</body>
+</html>
